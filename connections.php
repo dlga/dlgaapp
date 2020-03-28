@@ -1,7 +1,7 @@
 <?php
 
 	function openBDConnection() {
-		$host="mysql:host=localhost;dbname=dbdelegacion";
+		$host="mysql:host=localhost;dbname=dbdelegacion;charset=utf8";
 		$usuario="root";
 		$password="";
 

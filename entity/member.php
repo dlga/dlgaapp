@@ -8,10 +8,6 @@ class Member {
     private $position;
 
     public function __construct($user) {
-        $data = $this->getMember($user);
-        
-        $this->name = $data["name"];
-        $this->position = $data["position"];
     }
 
     public function getName() {
@@ -19,27 +15,22 @@ class Member {
     }
     
     public function getPosition() {
-        return $this->position;
+        switch ($this->position) {
+            case 0:
+                $res = "Delegado de Centro";
+                break;
+            case 1:
+                $res = "Colaborador";
+                break;
+            case 2:
+                $res = "Delegado Nato";
+                break;
+        }
+        return $res;
     }
     
     public function toString() {
-        return $name + ", " + $position;
-    }
-
-    private function getMember($user) {
-        $connection = openBDConnection();
-
-        try {
-            $consulta = "SELECT * FROM Miembros WHERE user=:user";
-            $stmt = $connection->prepare($consulta);
-            $stmt->bindParam(':user',$user);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch(PDOException $e) {
-            $errors["database"] = "Error al realizar la consulta a la base de datos";
-            $_SESSION["errorMember"] = $errors;
-            header("Location: index.php");
-        }
+        return getName() + ", " + getPosition();
     }
 
 }

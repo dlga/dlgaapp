@@ -21,17 +21,17 @@
         </header>
         <main>
             <!-- Formulario inicio de sesión -->
-            <form action="index_function.php" method="post" onsubmit="return validar()">
+            <form action="index_function.php" method="post">
 				<div>
-                    <label for="user">User: </label>
+                    <label for="user">Nombre de usuario: </label>
                     <input type="text" name="user" id="user" required />
                     <label for="pass">Contraseña: </label>
                     <input type="password" name="pass" id="pass" pattern="[A-Za-z0-9, ]+" required />
                 </div>
 				<input type="submit" name="submit" value="Login" />
-                <?php if (isset($login)) { ?>
+                <?php if (isset($_SESSION["errorLogin"])) { ?>
 		            <div class="error">
-		                <p> Error en la contraseña o no existe el usuario. </p>
+		                <p> <?php print_r($_SESSION["errorLogin"]); ?> </p>
 		            </div>"
 	            <?php }	?>
 			</form>

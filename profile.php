@@ -7,26 +7,33 @@
         <title>Profile - dlgaApp</title>
     </head>
 
-<?php
-    require_once("/entity/member.php");
+    <?php
+        require_once("/entity/member.php");
 
-    session_start();
+        session_start();
 
-    if(!isset($_SESSION["member"])) {
-        header("Location: index.php");
-        exit;
-    } 
+        if(!isset($_SESSION["member"])) {
+            header("Location: index.php");
+            exit;
+        } 
 
-    $currentMember = $_SESSION["member"];
-?>
+        $currentMember = $_SESSION["member"];
+    ?>
 
     <body>
         <header>
         </header>
         <main>
             <h3> 
-                <?php echo($currentMember->getName()); ?>
+                <?php 
+                    echo($currentMember->getName());
+                    echo "<br />";
+                    echo($currentMember->getPosition());
+                ?>
             </h3>
+            <form action="profile_function.php" method="post">
+                <input type="submit" name="exit" value="Exit">
+            </form>
         </main>
     </body>
 </html>

@@ -32,17 +32,16 @@
 		$pass = $_POST["pass"];
 
 		$connection = openBDConnection();
-		$users_number = findUserByCredentials($connection, $user, $pass);
+		$member = findUserByCredentials($connection, $user, $pass);
 		
 		closeBDConnection($connection);
 		
-		if ($users_number[0] == 0) {
+		if (is_bool($member)) {
             $errors["login"] = "Usuario o contraseña inválidos";
             $_SESSION["errorLogin"] = $errors;
             header("Location: index.php");
             exit;
-        } else {		
-            $member = new Member($user);
+        } else {
 			$_SESSION["member"] = $member;
 			Header("Location: profile.php");
 		}
@@ -50,18 +49,21 @@
 
     function findUserByCredentials($connection, $user, $pass) {
         try {
-            $query = "SELECT COUNT(*) AS TOTAL FROM Members WHERE user=:user AND pass=:pass";
+            $query = "SELECT * FROM Members WHERE user=:user AND pass=:pass";
             $stmt = $connection->prepare($query);
             $stmt->bindParam(':user', $user);
             $stmt->bindParam(':pass', $pass);
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Member');
             $stmt->execute();
-            return $stmt->fetchColumn();
+            $member = $stmt->fetch();
+            return $member;
         } catch(PDOException $e) {
             $errors["database"] = "Error al realizar la consulta a la base de datos";
             $_SESSION["errorLogin"] = $errors;
             header("Location: index.php");
             exit;
         }
+
     }
 
     //password_hash($pass, PASSWORD_DEFAULT) --> Encripta contraseña para guardarla en la bbdd
