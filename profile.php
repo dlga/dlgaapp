@@ -31,6 +31,17 @@
                     echo($currentMember->getPosition());
                 ?>
             </h3>
+                <?php
+                    echo "<p>Comisiones de Centro</p>";
+                    echo($currentMember->getCommissions());
+                    echo "<p>Departamentos</p>";
+                    echo($currentMember->getDepartament());
+                ?>
+            
+            <a href="#"> Información </a>
+            <a href="#"> Incidencias </a>
+            <a href="#"> Documentos </a>
+
             <form action="profile_function.php" method="post">
                 <input type="submit" name="exit" value="Exit">
             </form>

@@ -6,6 +6,8 @@ include_once("connections.php");
 class Member {
     private $name;
     private $position;
+    private $commissions;
+    private $departament;
 
     public function __construct($user) {
     }
@@ -27,6 +29,30 @@ class Member {
                 break;
         }
         return $res;
+    }
+
+    public function getCommissions() {
+        return $this->commissions;
+    }
+
+    public function addCommissions() {
+
+    }
+
+    public function addAllCommission() {
+
+    }
+
+    public function getDepartament() {
+        return $this->departament;
+    }
+
+    public function addDepartament() {
+
+    }
+
+    public function addAllDepartament() {
+        
     }
     
     public function toString() {
