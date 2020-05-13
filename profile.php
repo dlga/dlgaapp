@@ -38,13 +38,13 @@
                     echo($currentMember->getDepartament());
                 ?>
             <div>
-                <a href="#"> Información </a>
+                <a href="information/index.php"> Información </a>
             </div>
             <div>
-                <a href="#"> Incidencias </a>
+                <a href="complain/index.php"> Incidencias </a>
             </div>
             <div>
-                <a href="#"> Documentos </a>
+                <a href="document/index.php"> Documentos </a>
             </div>
 
             <form action="profile_function.php" method="post">

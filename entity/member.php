@@ -1,8 +1,6 @@
 <?php
 // Clase de definición de la Entidad referente al Miembro de la Delegación
 
-include_once("connections.php");
-
 class Member {
     private $idMember;
     private $name;
