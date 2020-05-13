@@ -37,10 +37,15 @@
                     echo "<p>Departamentos</p>";
                     echo($currentMember->getDepartament());
                 ?>
-            
-            <a href="#"> Información </a>
-            <a href="#"> Incidencias </a>
-            <a href="#"> Documentos </a>
+            <div>
+                <a href="#"> Información </a>
+            </div>
+            <div>
+                <a href="#"> Incidencias </a>
+            </div>
+            <div>
+                <a href="#"> Documentos </a>
+            </div>
 
             <form action="profile_function.php" method="post">
                 <input type="submit" name="exit" value="Exit">

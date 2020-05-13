@@ -4,12 +4,17 @@
 include_once("connections.php");
 
 class Member {
+    private $idMember;
     private $name;
     private $position;
     private $commissions;
-    private $departament;
+    private $departaments;
 
     public function __construct($user) {
+    }
+
+    public function getId() {
+        return $this->idMember;
     }
 
     public function getName() {
@@ -35,24 +40,24 @@ class Member {
         return $this->commissions;
     }
 
-    public function addCommissions() {
-
+    public function addCommission($commission) {
+        $this->commissions += $commission;
     }
 
-    public function addAllCommission() {
-
+    public function addAllCommissions($listCommissions) {
+        $this->commissions += $listCommissions;
     }
 
     public function getDepartament() {
-        return $this->departament;
+        return $this->departaments;
     }
 
-    public function addDepartament() {
-
+    public function addDepartament($departament) {
+        $this->departaments += $departament;
     }
 
-    public function addAllDepartament() {
-        
+    public function addAllDepartaments($listDepartaments) {
+        $this->departaments += $listDepartaments;
     }
     
     public function toString() {

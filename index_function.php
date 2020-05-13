@@ -13,8 +13,9 @@
         $errors["user"] = "Usuario inválido";
         header("Location: index.php");
     }
-    
+
     //Comprobar que se ha pasado el campo pass y cumple el patrón $pattern.
+    $pattern = "[0-9]";
     if(!isset($_REQUEST["pass"]) || preg_match($pattern, $_REQUEST["pass"])) {
         $errors["pass"] = "Contraseña inválida";
         header("Location: index.php");
@@ -26,7 +27,7 @@
         exit;
     }
     
-	//Comprueba que el usuari y la constaseña son correctas. En caso de no serlo, vuelve a la vista index.php
+	//Comprueba que el usuario y la constaseña son correctas. En caso de no serlo, vuelve a la vista index.php
 	if (isset($_POST["submit"])){
 		$user = $_POST["user"];
 		$pass = $_POST["pass"];
@@ -42,7 +43,8 @@
             header("Location: index.php");
             exit;
         } else {
-			$_SESSION["member"] = $member;
+            $_SESSION["member"] = $member;
+            $_SESSION["errorLogin"] = null;
 			Header("Location: profile.php");
 		}
 	}
@@ -56,6 +58,18 @@
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Member');
             $stmt->execute();
             $member = $stmt->fetch();
+            $query = "SELECT name FROM CommissionsByMember cm INNER JOIN Commissions c ON cm.idCommission = c.idCommission WHERE cm.idMember=:idMember";
+            $stmtc = $connection->prepare($query);
+            $stmtc->bindParam(':idMember', $member->getId());
+            $stmtc->execute();
+            $stmtc->fetch();
+            $member->addAllCommissions();
+            $query = "SELECT name FROM DepartamentsByMember dm INNER JOIN Departaments d ON dm.idDepartament = d.idDepartament WHERE dm.idMember=:idMember";
+            $stmtd = $connection->prepare($query);
+            $stmtd->bindParam(':idMember', $member->getId());
+            $stmtd->execute();
+            $stmtd->fetch();
+            $member->addAllDepartaments();
             return $member;
         } catch(PDOException $e) {
             $errors["database"] = "Error al realizar la consulta a la base de datos";
