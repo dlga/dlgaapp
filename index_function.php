@@ -2,7 +2,7 @@
 
     session_start();
 
-    require_once("connections.php");
+    require_once("/connections.php");
 
     require_once("/entity/member.php");
 
